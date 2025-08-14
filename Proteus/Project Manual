@@ -1,0 +1,21 @@
+# Proteus Project Manual
+
+This folder contains the Proteus simulation file for the 8051 Smart Parking System project.
+
+## File:
+- PARK.pdsprj : Main Proteus simulation project file
+
+## How to Use:
+1. Open **Proteus** software.
+2. Go to **File → Open** and select `PARK.pdsprj`.
+3. Ensure the compiled HEX file from Keil is in the correct location (linked in the project).
+4. Start the simulation:
+   - Entry and Exit push buttons simulate car movement.
+   - LCD displays current parking count.
+   - Motors simulate gates for entry and exit.
+5. Observe the system working according to button presses and car count updates.
+
+## Notes:
+- Do **not delete** this file — it serves as a reference manual.
+- Make sure Proteus version is compatible with the components used (8051, 16x4 LCD, DC motors).
+- Use Keil to recompile the HEX file if you make changes in `8051.c`.
