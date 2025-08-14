@@ -1,0 +1,18 @@
+# Results and Documentation Manual
+
+This folder contains all the documentation and results for the 8051 Smart Parking System project.
+
+## Contents:
+- Project_Description.pdf  : Full description of the project, objectives, components, and workflow.
+- Simulation_Results/      : Screenshots and outputs from the Proteus simulation.
+- Keil_Compilation/        : Any compiled HEX files or screenshots from Keil.
+
+## How to Use:
+1. Open the Project_Description.pdf to understand the project scope and working.
+2. View the simulation screenshots in the Simulation_Results folder to see the system in action.
+3. Refer to Keil_Compilation folder for compiled files to load into Proteus if needed.
+4. Add additional documentation, charts, or reports here as you progress.
+
+## Notes:
+- Keep this file as a reference guide for the folder.
+- Update the folder with new simulation results or documentation as the project evolves.
