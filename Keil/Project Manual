@@ -1,0 +1,18 @@
+# Keil Project Manual
+
+This folder contains the Keil C code for the 8051 Smart Parking System project.
+
+## File:
+- 8051.c : Main C source code for the project
+
+## How to Use:
+1. Open **Keil µVision** software.
+2. Open the project file or create a new project and add `8051.c` to it.
+3. Ensure the correct microcontroller (AT89C51 / 8051) is selected in project settings.
+4. Compile the project to generate the HEX file.
+5. Copy the generated HEX file to the location linked in the Proteus simulation (`PARK.pdsprj`).
+
+## Notes:
+- Do not modify the Proteus project file unless necessary.
+- Delay values and port connections can be adjusted in `8051.c` to match your simulation setup.
+- Always compile in Keil before running the Proteus simulation to reflect code changes.
