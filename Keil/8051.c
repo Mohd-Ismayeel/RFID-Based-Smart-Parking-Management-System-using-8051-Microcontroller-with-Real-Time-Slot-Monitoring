@@ -1,0 +1,111 @@
+#include <REGX51.H>
+#include <stdio.h>
+
+// LCD pin connections
+sbit RS = P2^0;
+sbit EN = P2^1;
+sbit RW = P2^2;
+#define LCD P1   // LCD data port
+
+// Motor pin connections
+sbit MOTOR = P2^7;
+
+// Push buttons (replacing ultrasonic sensors)
+sbit ENTRY_BTN = P0^0;  // Entry gate sensor
+sbit EXIT_BTN  = P0^1;  // Exit gate sensor
+
+// Function prototypes
+void delay_ms(unsigned int ms);
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char dat);
+void lcd_init(void);
+void lcd_string(char *str);
+
+// Variables
+unsigned char car_count = 0;
+
+void main(void) {
+    // Initial states
+    P0 = 0xFF;   // Make P0 inputs (with pull-ups in hardware)
+    MOTOR = 0;   // Motor off
+    lcd_init();
+    lcd_string("Car Parking Sys");
+    lcd_cmd(0xC0);
+    lcd_string("Cars: 0");
+
+    while (1) {
+        // Entry Button pressed
+        if (ENTRY_BTN == 0) {  // Active-low
+            delay_ms(50);      // Debounce
+            if (ENTRY_BTN == 0) {
+                car_count++;
+                lcd_cmd(0xC0);
+                lcd_string("Cars: ");
+                lcd_data((car_count/10) + '0');
+                lcd_data((car_count%10) + '0');
+                MOTOR = 1; // Open gate
+                delay_ms(1000);
+                MOTOR = 0; // Close gate
+                while (ENTRY_BTN == 0); // Wait until released
+            }
+        }
+
+        // Exit Button pressed
+        if (EXIT_BTN == 0) {   // Active-low
+            delay_ms(50);      // Debounce
+            if (EXIT_BTN == 0 && car_count > 0) {
+                car_count--;
+                lcd_cmd(0xC0);
+                lcd_string("Cars: ");
+                lcd_data((car_count/10) + '0');
+                lcd_data((car_count%10) + '0');
+                MOTOR = 1; // Open gate
+                delay_ms(1000);
+                MOTOR = 0; // Close gate
+                while (EXIT_BTN == 0); // Wait until released
+            }
+        }
+    }
+}
+
+// LCD Functions
+void lcd_cmd(unsigned char cmd) {
+    LCD = cmd;
+    RS = 0;
+    RW = 0;
+    EN = 1;
+    delay_ms(2);
+    EN = 0;
+}
+
+void lcd_data(unsigned char dat) {
+    LCD = dat;
+    RS = 1;
+    RW = 0;
+    EN = 1;
+    delay_ms(2);
+    EN = 0;
+}
+
+void lcd_init(void) {
+    lcd_cmd(0x38); // 8-bit mode
+    lcd_cmd(0x0C); // Display ON
+    lcd_cmd(0x06); // Auto increment
+    lcd_cmd(0x01); // Clear
+    delay_ms(2);
+}
+
+void lcd_string(char *str) {
+    while (*str) {
+        lcd_data(*str++);
+    }
+}
+
+// Delay function
+void delay_ms(unsigned int ms) {
+    unsigned int i, j;
+    for (i = 0; i < ms; i++) {
+        for (j = 0; j < 1275; j++);
+    }
+}
+
