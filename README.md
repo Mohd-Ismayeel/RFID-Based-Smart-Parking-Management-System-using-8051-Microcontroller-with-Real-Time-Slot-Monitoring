@@ -17,6 +17,7 @@ This project implements a smart parking system using the 8051 microcontroller. I
 - Push buttons for entry/exit
 - DC motors for gates
 - Virtual Terminal (optional, for debugging)
+- [⚙️Proteus Project](Proteus/PARK.pdsprj) 
 
 ## Keil Code
 - Written in C
