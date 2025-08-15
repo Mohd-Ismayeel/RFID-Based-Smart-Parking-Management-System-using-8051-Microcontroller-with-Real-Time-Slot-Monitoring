@@ -22,6 +22,7 @@ This project implements a smart parking system using the 8051 microcontroller. I
 - Written in C
 - Compatible with AT89C51
 - Delay functions, LCD control, motor control included
+- Keil/8051.c
 
 ## How to Run
 1. Open the Proteus project (`PARK.pdsprj`)
